@@ -49,6 +49,7 @@ const path = {
 		css: projectFolder + "/css/",
 		img: projectFolder + "/img/",
 		fonts: projectFolder + "/fonts/",
+		video: projectFolder + "/video/",
 	},
 	src: {
 		js: sourceFolder + "/js/script.js",
@@ -57,6 +58,7 @@ const path = {
 		fonts: sourceFolder + "/fonts/**/*.{woff,woff2}",
 		img: sourceFolder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
 		html: [sourceFolder + "/*.html", "!"+sourceFolder + "/_*html"],
+		video: [sourceFolder + "/video/*.**"],
 	},
 	original: {
 		fontFolder: sourceFolder + "/_originalFonts/",
@@ -71,6 +73,7 @@ const path = {
 		css: sourceFolder + "/scss/**/*.scss",
 		img: sourceFolder + "/img/**/*.{jpg,jpeg,png,svg,gif,ico,webp}",
 		fonts: sourceFolder + "/fonts/**/*.{woff,woff2}",
+		video: sourceFolder + "/video/**/*.mp4"
 	},
 	clean: "./" + projectFolder + "/"
 };	
@@ -85,6 +88,11 @@ function browserSync() {
 		online: true,
 	})
 };
+
+function copyVideo() {
+	return src(path.src.video)
+		.pipe(dest(path.build.video))
+}
 
 function html() {
 	return src(path.src.html)
@@ -200,7 +208,7 @@ function svgSprite() {
 	.pipe(dest(sourceFolder + '/img/'))
 };
 
-let build = series(clean, parallel(images, js, css, html, fonts));
+let build = series(clean, parallel(images, js, css, html, fonts, copyVideo));
 
 exports.webFonts 			= webFonts;						
 exports.svgSprite 		= svgSprite;					
