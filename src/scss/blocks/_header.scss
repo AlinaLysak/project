@@ -1,6 +1,12 @@
 header {
   background: gold;
 }
+.logo {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
 .logo_text {
   font-family: "Oswald";
   font-weight: 600;

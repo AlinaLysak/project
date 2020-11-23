@@ -1,0 +1,26 @@
+.perspective_prelude {
+  height: 368px;
+  background-image: url("../img/fon2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.perspective_title {
+  color: white;
+  margin-top: 170px;
+}
+.perspective_prelude_text {
+  color: white;
+  width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  p {
+    padding: 0 30px;
+   }
+  line-height: 1.5;
+}
+.sign {
+  font-size: 14px;
+  margin-left: -138px;
+  margin-top: 5px;
+}

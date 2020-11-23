@@ -24,6 +24,9 @@ h1, h2, h3 {
 p {
   margin: 10px 0;
 }
+li {
+  margin-bottom: 5px;
+}
 .title {
   font-family: "Oswald";
   font-weight: 600;
@@ -31,3 +34,27 @@ p {
   text-align: center;
   margin-top: 20px;
 }
+.subtitle {
+  color: #051634;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+.page_text {
+  margin: 20px 0;
+  padding: 0 30px;
+}
+.page_grey {
+  background: #F3F0F0;
+  margin: 0;
+  padding: 20px 30px 30px 30px;
+}
+.page_img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
