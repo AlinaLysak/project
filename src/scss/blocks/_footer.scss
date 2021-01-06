@@ -1,0 +1,35 @@
+.footer_wrap {
+  background-image: url(../img/footerfon.png);
+  background-size: cover;
+  color: white;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.footer_top, .footer_bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.footer_top {
+  border-bottom: 1px solid white;
+  align-items: center;
+}
+.footer_top_text {
+  width: 795px;
+  padding-bottom: 10px;
+  font-size: 14px;
+  line-height: 2;
+}
+.footer_bottom {
+  padding-top: 12px;
+  padding-bottom: 22px;
+}
+.footer_nav {
+  a {
+    color: white;
+  }
+  li {
+    margin-right: 45px;
+  }
+  margin-right: 40px;
+}

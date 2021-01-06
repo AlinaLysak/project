@@ -3,6 +3,7 @@ html {
 }
 body {
   margin: 0;
+  padding: 0;
 }
 .content {
   font-family: "Ubuntu", sans-serif;
@@ -15,14 +16,32 @@ body {
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  // border: 1px solid olive;
-  // background:rgb(225, 202, 247);
+  position: relative;
+  background:#f5f4f4;
 }
+
 h1, h2, h3 {
   margin: 0;
 }
 p {
   margin: 10px 0;
+}
+ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.ul_block{
+  display: block;
+  margin-top: 10px;
+}
+.ul_dot {
+  list-style: inside;
+}
+a {
+  display: block;
+  text-decoration: none;
 }
 li {
   margin-bottom: 5px;
@@ -41,12 +60,20 @@ li {
   text-align: center;
   margin-top: 20px;
 }
+.subtitle_left {
+  text-align: left;
+}
+.subtitle_h3 {
+  font-size: 20px;
+  color: #051634;
+  text-align: center;
+}
 .page_text {
   margin: 20px 0;
   padding: 0 30px;
 }
 .page_grey {
-  background: #F3F0F0;
+  background: rgb(196, 196, 197); 
   margin: 0;
   padding: 20px 30px 30px 30px;
 }
@@ -57,4 +84,9 @@ li {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-
+.mt20 {
+  margin-top: 20px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
