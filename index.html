@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИнноКубань | Экосистема</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #003366;
+            --accent: #FF8C00;
+            --bg: #F3F4F6;
+            --card: #ffffff;
+            --text: #111827;
+            --text-light: #6B7280;
+            --radius: 20px;
+        }
+
+        * { box-sizing: border-box; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header {
+            height: 64px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 24px; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .logo { font-weight: 800; font-size: 18px; color: var(--primary); }
+
+        /* --- MINI SIDEBAR --- */
+        .sidebar {
+            width: 80px; /* Компактный размер */
+            background: #fff; position: fixed; top: 64px; left: 0; height: calc(100vh - 64px);
+            display: flex; flex-direction: column; align-items: center; padding-top: 20px; z-index: 999;
+        }
+        .nav-btn {
+            width: 50px; height: 50px; border-radius: 14px; margin-bottom: 16px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--text-light); text-decoration: none; font-size: 10px; font-weight: 600;
+        }
+        .nav-btn span { margin-top: 4px; font-size: 9px; }
+        .nav-btn:hover { background: var(--bg); color: var(--primary); }
+        .nav-btn.active { background: var(--primary); color: #fff; box-shadow: 0 10px 15px -3px rgba(0, 51, 102, 0.3); }
+
+        /* --- CONTENT WRAPPER --- */
+        .content { margin-left: 80px; margin-top: 64px; padding: 32px; min-height: 100vh; }
+        .page { display: none; animation: fadeIn 0.4s ease-out; }
+        .page.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- COMPONENTS --- */
+        .welcome { background: #fff; padding: 24px; border-radius: var(--radius); margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+        .masonry { column-count: 3; column-gap: 20px; }
+        @media (max-width: 1100px) { .masonry { column-count: 2; } }
+
+        .card {
+            break-inside: avoid; background: #fff; border-radius: var(--radius);
+            padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .card:hover { transform: scale(1.02); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+
+        /* --- SPECIFIC STYLES FOR PAGES --- */
+        .passport-grid { display: grid; grid-template-columns: 300px 1fr; gap: 24px; }
+        .radar-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+        .user-card { background: #fff; border-radius: var(--radius); padding: 16px; text-align: center; }
+        .avatar { width: 60px; height: 60px; background: #ddd; border-radius: 50%; margin: 0 auto 10px; }
+
+        .tag { background: var(--bg); padding: 4px 10px; border-radius: 8px; font-size: 11px; margin: 2px; display: inline-block; }
+        .btn-main { background: var(--accent); color: #fff; border: none; padding: 10px; border-radius: 12px; width: 100%; font-weight: 700; cursor: pointer; margin-top: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">inno.kuban</div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <div style="text-align: right;"><div style="font-weight: 700;">Иван Иванов</div><div style="font-size: 11px; color: var(--text-light);">Студент КубГУ</div></div>
+            <div class="avatar" style="width: 40px; height: 40px; margin: 0; background: linear-gradient(45deg, var(--primary), var(--accent));"></div>
+        </div>
+    </header>
+
+    <nav class="sidebar">
+        <div class="nav-btn active" onclick="showPage('dashboard', this)">
+            <div style="font-size: 18px;">⚡️</div><span>Лента</span>
+        </div>
+        <div class="nav-btn" onclick="showPage('passport', this)">
+            <div style="font-size: 18px;">👤</div><span>Паспорт</span>
+        </div>
+        <div class="nav-btn" onclick="showPage('radar', this)">
+            <div style="font-size: 18px;">🛰</div><span>Радар</span>
+        </div>
+        <div class="nav-btn" onclick="showPage('events', this)">
+            <div style="font-size: 18px;">📅</div><span>События</span>
+        </div>
+    </nav>
+
+    <div class="content">
+        <!-- СТРАНИЦА: ДАШБОРД -->
+        <div id="dashboard" class="page active">
+            <div class="welcome">
+                <h1 style="margin: 0; font-size: 22px;">Твои возможности на сегодня 🚀</h1>
+                <p style="color: var(--text-light); margin: 5px 0 0;">На основе навыков: Python, UI Design, Краснодар</p>
+            </div>
+            <div class="masonry">
+                <div class="card"><b style="color: var(--accent)">ГРАНТ</b><h3>Студенческий стартап</h3><div style="font-size: 20px; font-weight: 800;">1 000 000 ₽</div><button class="btn-main">Узнать больше</button></div>
+                <div class="card"><b>ХАКАТОН</b><h3>IT-Кубань 2026</h3><p>Региональный хакатон в Краснодаре. Кейсы от реального сектора.</p><button class="btn-main">Найти команду</button></div>
+                <div class="card"><b>ВАКАНСИЯ</b><h3>Junior Python Dev</h3><p>Компания: КубаньСофт. Удаленно или офис.</p><div class="tag">#Python</div><div class="tag">#SQL</div><button class="btn-main">Откликнуться</button></div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА: ПАСПОРТ ИННОВАТОРА -->
+        <div id="passport" class="page">
+            <div class="passport-grid">
+                <div class="card">
+                    <div class="avatar" style="width: 100px; height: 100px;"></div>
+                    <h2 style="text-align: center;">Иван Иванов</h2>
+                    <p style="text-align: center; color: var(--text-light);">Краснодар • 19 лет</p>
+                    <hr style="border: 0; border-top: 1px solid var(--bg); margin: 20px 0;">
+                    <div style="font-weight: 700; margin-bottom: 10px;">Навыки</div>
+                    <div class="tag">Python</div><div class="tag">Git</div><div class="tag">UI Design</div>
+                </div>
+                <div class="card">
+                    <h2>Мои достижения</h2>
+                    <div style="padding: 15px; border: 2px dashed var(--bg); border-radius: 15px; text-align: center; color: var(--text-light);">
+                        Перетащите сюда PDF с дипломом или сертификатом
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="card" style="background: var(--bg); box-shadow: none;">
+                            <b>🏆 Диплом олимпиады</b><br><small>Краснодар, 2025</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА: РАДАР КОМАНД -->
+        <div id="radar" class="page">
+            <div class="welcome"><h2>Радар команд 🛰</h2><p>Найди напарника в радиусе 50 км</p></div>
+            <div class="radar-list">
+                <div class="user-card card">
+                    <div class="avatar"></div>
+                    <b>Анна М.</b><br><small>Дизайнер</small>
+                    <div style="margin: 10px 0;"><span class="tag">Figma</span></div>
+                    <button class="btn-main" style="padding: 5px; font-size: 11px;">Предложить мэтч</button>
+                </div>
+                <div class="user-card card">
+                    <div class="avatar"></div>
+                    <b>Денис К.</b><br><small>Маркетолог</small>
+                    <div style="margin: 10px 0;"><span class="tag">Pitch</span></div>
+                    <button class="btn-main" style="padding: 5px; font-size: 11px;">Предложить мэтч</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА: СОБЫТИЯ -->
+        <div id="events" class="page">
+            <div class="welcome"><h2>Календарь событий 📅</h2></div>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between;">
+                    <div><b>15 Апреля</b> — Хакатон "АгроТех"</div>
+                    <div style="color: var(--accent); font-weight: 700;">Регистрация до завтра!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId, element) {
+            // Скрываем все страницы
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Показываем нужную
+            document.getElementById(pageId).classList.add('active');
+
+            // Снимаем активность со всех кнопок
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            // Делаем активной текущую
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
